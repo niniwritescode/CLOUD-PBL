@@ -1,16 +1,35 @@
 const express = require("express");
 const router = express.Router();
-const Service = require("../models/serviceModel");
+const db = require("../database/filedb");
 
-router.post("/service", async (req, res) => {
-    const service = new Service(req.body);
-    await service.save();
-    res.send("Service ordered successfully");
+// Get all services
+router.get("/services", (req, res) => {
+    try {
+        const services = db.getAllServices();
+        res.json(services);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
-router.get("/services", async (req, res) => {
-    const services = await Service.find();
-    res.json(services);
+// Order new service
+router.post("/service", (req, res) => {
+    try {
+        const { bookingId, foodItem, quantity } = req.body;
+        
+        if (!bookingId || !foodItem || !quantity) {
+            return res.status(400).json({ error: "Missing required fields" });
+        }
+
+        const service = db.addService(bookingId, foodItem, quantity);
+        res.json({ 
+            success: true, 
+            message: "Service ordered successfully",
+            service
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 module.exports = router;

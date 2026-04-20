@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "customerName": "nini",
+    "roomType": "Deluxe",
+    "checkIn": "2026-04-20",
+    "checkOut": "2026-04-30",
+    "price": "3000",
+    "created_at": "2026-04-20T14:41:34.039Z"
+  }
+]

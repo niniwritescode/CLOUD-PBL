@@ -1,51 +1,65 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
+
+// Import file-based database
+const db = require("./database/filedb");
+
+// Import routes
+const bookingRoutes = require("./routes/bookingRoutes");
+const serviceRoutes = require("./routes/serviceRoutes");
+const roomRoutes = require("./routes/roomRoutes");
 
 const app = express();
+
+// Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// sample room data
-let rooms = [
- {id:1,type:"Single",price:1000,available:true},
- {id:2,type:"Double",price:1800,available:true},
- {id:3,type:"Deluxe",price:3000,available:true}
-];
+// Serve static files
+app.use(express.static(path.join(__dirname, "public")));
 
-// bookings
-let bookings = [];
+// API Routes
+app.use("/", bookingRoutes);
+app.use("/", serviceRoutes);
+app.use("/", roomRoutes);
 
-// services
-let services = [];
-
-// get rooms
-app.get("/rooms",(req,res)=>{
- res.json(rooms);
+// Serve frontend
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// book room
-app.post("/book",(req,res)=>{
- const booking=req.body;
- bookings.push(booking);
- res.send("Room booked successfully");
+// Health check
+app.get("/api/health", (req, res) => {
+    res.json({ 
+        status: "Cloud Hotel Server Running", 
+        port: 5000,
+        timestamp: new Date(),
+        environment: process.env.NODE_ENV || "development",
+        database: "File-Based (JSON)",
+        dataDirectory: path.join(__dirname, "data")
+    });
 });
 
-// order food/service
-app.post("/service",(req,res)=>{
- const service=req.body;
- services.push(service);
- res.send("Service ordered");
+// 404 Handler
+app.use((req, res) => {
+    res.status(404).json({ error: "Route not found" });
 });
 
-// view bookings
-app.get("/bookings",(req,res)=>{
- res.json(bookings);
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error("❌ Error:", err.stack);
+    res.status(500).json({ error: "Internal Server Error", message: err.message });
 });
 
-app.get("/",(req,res)=>{
- res.send("Cloud Hotel Reservation SaaS Running");
-});
-
-app.listen(5000,()=>{
- console.log("Server running on port 5000");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`\n${'═'.repeat(50)}`);
+    console.log(`✓ Cloud Hotel Server running on http://localhost:${PORT}`);
+    console.log(`✓ Frontend available at http://localhost:${PORT}`);
+    console.log(`✓ API Health Check: http://localhost:${PORT}/api/health`);
+    console.log(`✓ Database: File-Based (JSON - No Dependencies!)`);
+    console.log(`✓ Data stored in: ${path.join(__dirname, "data")}`);
+    console.log(`${'═'.repeat(50)}\n`);
 });

@@ -1,16 +1,31 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-mongoose.connect("mongodb://127.0.0.1:27017/hotelDB", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/hotelDB";
+
+// Set connection options
+const connectionOptions = {
+    serverSelectionTimeoutMS: 5000,
+    connectTimeoutMS: 5000,
+    socketTimeoutMS: 5000,
+};
+
+mongoose.connect(mongoURI, connectionOptions).catch(err => {
+    console.error("⚠️  MongoDB connection failed (will use in-memory storage):", err.message);
 });
 
 const db = mongoose.connection;
 
-db.on("error", console.error.bind(console, "connection error:"));
+db.on("error", (err) => {
+    console.error("⚠️  MongoDB connection error:", err.message);
+});
 
-db.once("open", function () {
-    console.log("Database connected");
+db.once("open", () => {
+    console.log("✓ MongoDB connected successfully!");
+});
+
+db.on("disconnected", () => {
+    console.log("⚠️  MongoDB disconnected");
 });
 
 module.exports = mongoose;

@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "type": "Single",
+    "price": 1000,
+    "available": true
+  },
+  {
+    "id": 2,
+    "type": "Double",
+    "price": 1800,
+    "available": true
+  },
+  {
+    "id": 3,
+    "type": "Deluxe",
+    "price": 3000,
+    "available": true
+  }
+]
