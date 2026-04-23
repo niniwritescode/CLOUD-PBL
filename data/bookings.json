@@ -7,5 +7,32 @@
     "checkOut": "2026-04-30",
     "price": "3000",
     "created_at": "2026-04-20T14:41:34.039Z"
+  },
+  {
+    "id": 2,
+    "customerName": "khushi singh",
+    "roomType": "Deluxe",
+    "checkIn": "2026-04-22",
+    "checkOut": "2026-04-23",
+    "price": "3000",
+    "created_at": "2026-04-20T19:45:38.489Z"
+  },
+  {
+    "id": 3,
+    "customerName": "akshat",
+    "roomType": "Deluxe",
+    "checkIn": "2026-04-22",
+    "checkOut": "2026-04-23",
+    "price": "3000",
+    "created_at": "2026-04-20T19:46:09.136Z"
+  },
+  {
+    "id": 4,
+    "customerName": "akshat",
+    "roomType": "Deluxe",
+    "checkIn": "2026-04-22",
+    "checkOut": "2026-04-23",
+    "price": "3000",
+    "created_at": "2026-04-23T14:26:24.045Z"
   }
 ]

@@ -109,9 +109,22 @@
         </section>
 
         <!-- Alert Messages -->
-        <div id="alertMessage" class="alert"></div>
+        <div id="alertMessage" class="alert" aria-live="polite"></div>
     </div>
 
+    <div id="chatWidget" class="chat-widget hidden">
+        <div class="chat-widget-header">
+            <div class="chat-widget-title">Hotel Assistant</div>
+            <button type="button" class="chat-close" onclick="toggleChatWidget(false)" aria-label="Close chat">×</button>
+        </div>
+        <div id="chatMessages" class="chat-window"></div>
+        <form id="chatForm" class="chat-controls">
+            <input id="chatInput" type="text" class="chat-input" placeholder="Ask about rooms, bookings, or services..." autocomplete="off" required>
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+        <p class="chat-note">Tip: Ask “What are room prices?” or “How do I book a Deluxe room?”.</p>
+    </div>
+    <button id="chatToggleBtn" class="chat-toggle" onclick="toggleChatWidget(true)" aria-label="Open chat">💬</button>
     <script src="script.js"></script>
 </body>
 </html>

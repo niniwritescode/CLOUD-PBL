@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -9,6 +10,7 @@ const db = require("./database/filedb");
 const bookingRoutes = require("./routes/bookingRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
 const roomRoutes = require("./routes/roomRoutes");
+const chatRoutes = require("./routes/chatRoutes");
 
 const app = express();
 
@@ -24,6 +26,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", bookingRoutes);
 app.use("/", serviceRoutes);
 app.use("/", roomRoutes);
+app.use("/", chatRoutes);
 
 // Serve frontend
 app.get("/", (req, res) => {
