@@ -1,6 +1,6 @@
 # ☁️ Cloud Hotel Reservation System
 
-A complete, full-stack hotel reservation and service management system with a beautiful frontend, robust backend API, and MongoDB database.
+A full-stack hotel reservation and service management app with a refreshed UI, file-based backend, and a floating AI chatbot assistant.
 
 ![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
@@ -8,75 +8,68 @@ A complete, full-stack hotel reservation and service management system with a be
 
 ## 🚀 Quick Start
 
-Get up and running in 3 simple steps:
+Get running in 3 simple steps:
 
 ```bash
-# 1. Install dependencies
 npm install
-
-# 2. Initialize database
-npm run seed
-
-# 3. Start the server
 npm start
 ```
 
-Then open http://localhost:5000 in your browser!
+Then open http://localhost:5000 in your browser.
 
-**For detailed setup instructions, see [QUICKSTART.md](./QUICKSTART.md)**
+---
+
+## ✨ New Updates
+
+- Floating AI chat widget for hotel help
+- Smarter local chatbot responses for booking and pricing questions
+- Blue/black modern frontend theme
+- File-based JSON database for easy local development
+- Chat API endpoint at `/chat`
 
 ---
 
 ## ✨ Features
 
 ### 🎨 Frontend
-- Beautiful, modern, responsive UI
+- Modern responsive UI
+- Floating chatbot bubble
 - Room browsing with pricing
-- Easy booking system
-- Service/food ordering
-- Bookings dashboard
-- Real-time notifications
-- Mobile-friendly design
+- Easy booking form
+- Service ordering
+- Booking dashboard
+- Mobile-friendly layout
 
 ### 🔌 Backend
-- Express.js REST API
-- MongoDB with Mongoose
-- CORS enabled
-- Error handling
+- Node.js + Express REST API
+- File-based JSON database in `data/`
+- Local chatbot support via `/chat`
+- Static frontend serving
 - Health check endpoint
-- Static file serving
 
-### 💾 Database
-- MongoDB integration
-- Proper data models
-- Automatic seeding
-- Data validation
+### 💾 Data Storage
+- JSON files in `data/`
+- No external database required
+- Simple local persistence
 
 ---
 
 ## 📋 What's Included
 
 ### Frontend (`public/`)
-- `index.html` - Application interface
-- `styles.css` - Beautiful styling
-- `script.js` - Frontend logic
+- `index.html` — main UI
+- `styles.css` — updated blue-black theme
+- `script.js` — app logic + chatbot behavior
 
 ### Backend
-- `server.js` - Main server
-- `routes/` - API endpoints
-- `models/` - Database schemas
-- `database/db.js` - MongoDB connection
+- `server.js` — server entry point
+- `routes/` — API routes
+- `routes/chatRoutes.js` — chatbot API
+- `database/filedb.js` — JSON file storage
 
 ### Configuration
-- `.env` - Environment variables
-- `package.json` - Dependencies
-- `seed.js` - Database initialization
-
-### Documentation
-- `SETUP.md` - Detailed setup guide
-- `API_DOCS.md` - API reference
-- `ROADMAP.md` - Future features
-- `BUILD_SUMMARY.md` - Complete build details
+- `.env.example` — sample environment file
+- `package.json` — dependencies and scripts
 
 ---
 
@@ -84,10 +77,9 @@ Then open http://localhost:5000 in your browser!
 
 | Layer | Technology |
 |-------|------------|
-| **Frontend** | HTML5, CSS3, Vanilla JavaScript |
+| **Frontend** | HTML5, CSS3, JavaScript |
 | **Backend** | Node.js, Express.js |
-| **Database** | MongoDB, Mongoose |
-| **Additional** | Python (for future use) |
+| **Database** | File-based JSON (`data/` folder) |
 
 ---
 
@@ -95,57 +87,61 @@ Then open http://localhost:5000 in your browser!
 
 ### Rooms
 ```
-GET  /rooms              # Get all rooms
-POST /rooms              # Add new room
+GET  /rooms       # Get room list
+POST /rooms       # Add a room
 ```
 
 ### Bookings
 ```
-GET  /bookings           # Get all bookings
-POST /book               # Create booking
+GET  /bookings    # Get all bookings
+POST /book        # Create booking
 ```
 
 ### Services
 ```
-GET  /services           # Get ordered services
-POST /service            # Order a service
+GET  /services    # Get ordered services
+POST /service     # Order a service
+```
+
+### Chat
+```
+POST /chat        # Send message to local chatbot
 ```
 
 ### Status
 ```
-GET  /api/health         # Server health check
-GET  /                   # Frontend
+GET /api/health   # Health check
+GET /              # Frontend
 ```
-
-**Full API documentation: [API_DOCS.md](./API_DOCS.md)**
 
 ---
 
 ## 🎯 How to Use
 
-### 1. View Rooms
-- Navigate to "Book Room" tab
-- See all available rooms with prices
-- Click on a room to select it
+### 1. Browse Rooms
+- Open the app
+- Click "Book Room"
+- See available rooms and prices
+- Click a room card to select it
 
 ### 2. Book a Room
 - Fill in your name
-- Select room type
-- Choose check-in and check-out dates
+- Choose room type
+- Set check-in and check-out dates
 - Price updates automatically
-- Click "Confirm Booking"
+- Submit the form
 
 ### 3. Order Services
-- Go to "Services" tab
-- Enter your booking ID
-- Select service/food item
+- Open "Services"
+- Enter booking ID
+- Enter food or service item
 - Enter quantity
-- Click "Order Service"
+- Submit request
 
-### 4. View Bookings
-- Go to "My Bookings" tab
-- See all your confirmed bookings
-- Check booking details
+### 4. Use the Chatbot
+- Click the floating chat bubble
+- Ask about pricing, booking, or services
+- Get local AI-style responses instantly
 
 ---
 
@@ -153,45 +149,21 @@ GET  /                   # Frontend
 
 ### Prerequisites
 - Node.js (v14+)
-- MongoDB (local or cloud)
-- npm or yarn
+- npm
 
 ### Setup Steps
 
-1. **Clone/Open Project**
-   ```bash
-   cd Cloud
-   ```
-
-2. **Install Dependencies**
+1. Clone or open the repo
+2. Install dependencies
    ```bash
    npm install
    ```
-
-3. **Start MongoDB**
-   ```bash
-   # Windows
-   mongod
-   
-   # macOS
-   brew services start mongodb-community
-   
-   # Linux
-   sudo systemctl start mongod
-   ```
-
-4. **Initialize Database**
-   ```bash
-   npm run seed
-   ```
-
-5. **Start Server**
+3. Start the app
    ```bash
    npm start
    ```
-
-6. **Open in Browser**
-   ```
+4. Open the browser
+   ```text
    http://localhost:5000
    ```
 
@@ -202,33 +174,24 @@ GET  /                   # Frontend
 ```bash
 npm start       # Start the server
 npm run dev     # Start with auto-reload (requires nodemon)
-npm run seed    # Seed database with sample data
-npm test        # Run tests (coming soon)
 ```
 
 ---
 
 ## 📝 Environment Variables
 
-Create or edit `.env` file:
+Create a `.env` file if you need custom settings.
 
 ```env
 PORT=5000
-MONGODB_URI=mongodb://127.0.0.1:27017/hotelDB
-NODE_ENV=development
 ```
 
----
+Optional for AI integration:
 
-## 🏨 Sample Data
-
-After running `npm run seed`, you'll have:
-
-| Room Type | Price | Status |
-|-----------|-------|--------|
-| Single | ₹1,000 | Available |
-| Double | ₹1,800 | Available |
-| Deluxe | ₹3,000 | Available |
+```env
+HUGGING_FACE_API_KEY=your_hugging_face_api_key_here
+HUGGING_FACE_MODEL=gpt2
+```
 
 ---
 
@@ -236,26 +199,25 @@ After running `npm run seed`, you'll have:
 
 ```
 Cloud/
-├── public/                  # Frontend files
+├── public/
 │   ├── index.html
 │   ├── styles.css
 │   └── script.js
-├── routes/                  # API routes
+├── routes/
 │   ├── bookingRoutes.js
-│   ├── serviceRoutes.js
-│   └── roomRoutes.js
-├── models/                  # Database models
-│   ├── bookingModel.js
-│   ├── serviceModel.js
-│   └── roomModel.js
+│   ├── chatRoutes.js
+│   ├── roomRoutes.js
+│   └── serviceRoutes.js
 ├── database/
-│   └── db.js               # MongoDB connection
-├── server.js               # Main server file
-├── seed.js                 # Database seeding
-├── config.js               # Configuration
-├── package.json            # Dependencies
-├── .env                    # Environment variables
-└── README.md              # This file
+│   └── filedb.js
+├── data/
+│   ├── bookings.json
+│   ├── rooms.json
+│   └── services.json
+├── server.js
+├── package.json
+├── .env.example
+└── README.md
 ```
 
 ---
